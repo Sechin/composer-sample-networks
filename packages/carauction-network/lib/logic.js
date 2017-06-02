@@ -33,7 +33,14 @@ function closeBidding(closeBidding) {
         listing.offers.sort(function(a, b) {
             return (b.bidPrice - a.bidPrice);
         });
-        highestOffer = listing.offers[0];
+        for(var i=0; i<listing.offers.length; i++){
+            var e=listing.offers[i];
+            if(e.member.balance>=e.bidPrice){
+                highestOffer = e;
+                break;
+            }
+        };
+        //highestOffer = listing.offers[0];
         if (highestOffer.bidPrice >= listing.reservePrice) {
             // mark the listing as SOLD
             listing.state = 'SOLD';
